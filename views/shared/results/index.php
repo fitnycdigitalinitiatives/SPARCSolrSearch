@@ -10,152 +10,147 @@
 ?>
 
 
-<?php queue_css_file('results'); ?>
 <?php echo head(array('title' => __('Solr Search')));?>
 
 
-<h1><?php echo __('Search the Collection'); ?></h1>
+<h1>
+<?php echo __('Search Results '); ?> 
+<?php $query = array_key_exists('q', $_GET) ? $_GET['q'] : ''; ?>
+<?php if (preg_match('/^#[a-f0-9]{6}$/i', $query)): ?>
+<span class="glyphicon glyphicon-tint" style="color: <?php echo $query; ?>;">
+</span>
+<?php else: ?>
+<span class="badge">
+<?php echo $query; ?> 
+</span>
+<?php endif; ?> 
+<span class="badge">
+	<?php echo $results->response->numFound; ?>
+</span>
+</h1>
 
+<hr>
 
-<!-- Search form. -->
-<div class="solr">
-  <form id="solr-search-form">
-    <input type="submit" value="Search" />
-    <span class="float-wrap">
-      <input type="text" title="<?php echo __('Search keywords') ?>" name="q" value="<?php
-        echo array_key_exists('q', $_GET) ? $_GET['q'] : '';
-      ?>" />
-    </span>
-  </form>
+<div class="row">
+	<div id="solr-results" class="col-lg-9 col-md-8 col-sm-6">
+		<!-- Results Grid -->
+		<div class="row" id="grid">
+
+			<?php foreach ($results->response->docs as $doc): ?>
+
+			<!-- Document. -->
+			<div class="result col-lg-4 col-md-6 col-sm-12 col-xs-6 item-thumb">
+
+				<!-- Record URL. -->
+				<?php $url = SolrSearch_Helpers_View::getDocumentUrl($doc); ?>
+
+				<!-- Title. -->
+				<a href="<?php echo $url; ?>" class="thumbnail">
+					<?php $record = get_db()->getTable($doc->model)->find($doc->modelid); ?>
+					<?php $recordType = $doc->resulttype; ?>
+					<?php if ($recordType == 'Exhibit Page'): ?>
+						<?php $exhibit = $record->getExhibit(); ?>
+						<?php $recordImage = record_image($exhibit, 'square_thumbnail', array('class' => 'img-responsive')); ?>
+					<?php else: ?>
+						<?php $recordImage = record_image($record, 'square_thumbnail', array('class' => 'img-responsive')); ?>
+					<?php endif; ?>
+					<?php echo $recordImage; ?>
+					<!-- Result type. -->
+					<?php if ($recordType == 'Item'): ?>
+						<span class="badge result-type"><?php echo metadata($record, 'item_type_name'); ?></span>
+					<?php else: ?>
+						<span class="badge result-type"><?php echo $recordType; ?></span>
+					<?php endif; ?>
+					<div class="caption">
+						<h5>
+						<?php
+							$title = is_array($doc->title) ? $doc->title[0] : $doc->title;
+							if (empty($title)) {
+								$title = '<i>' . __('Untitled') . '</i>';
+							}
+							echo $title;
+						?>
+						</h5>
+					</div>
+				</a>
+			</div>
+
+			<?php endforeach; ?>
+		</div>
+	</div>
+	<!-- Facets. -->
+	<div class="col-lg-3 col-md-4 col-sm-6">		
+		<div id="solr-facets">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<strong><?php echo __('Limit your search'); ?></strong>
+				</div>
+			</div>
+			<!-- Applied facets. -->
+			<?php if (SolrSearch_Helpers_Facet::parseFacets()): ?>
+				<div id="solr-applied-facets" class="panel panel-default">
+					<div class="panel-heading">
+						<strong>Current Filters</strong>
+					</div>
+					<div class="list-group">
+						<!-- Get the applied facets. -->
+						<?php foreach (SolrSearch_Helpers_Facet::parseFacets() as $f): ?>
+							<!-- Remove link. -->
+							<?php $url = SolrSearch_Helpers_Facet::removeFacet($f[0], $f[1]); ?>
+							<a class="list-group-item" href="<?php echo $url; ?>">
+							<!-- Facet label. -->
+							<?php $label = SolrSearch_Helpers_Facet::keyToLabel($f[0]); ?>
+							<span class="applied-facet-value"><?php echo $f[1]; ?> </span>
+							<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							</a>
+						<?php endforeach; ?>
+					</div>
+				</div>
+			<?php endif; ?>
+			
+			<?php $collapse_count = 1; ?>
+			<?php foreach ($results->facet_counts->facet_fields as $name => $facets): ?>
+				<!-- Does the facet have any hits? -->
+				<?php if (count(get_object_vars($facets))): ?>
+					<div class="panel panel-default">
+						<!-- Facet label. -->
+						<?php $label = SolrSearch_Helpers_Facet::keyToLabel($name); ?>
+						<div class="panel-heading">
+							<strong><?php echo $label; ?></strong>							
+						</div>
+						<div class="list-group">
+							<!-- Facets. -->
+							
+							<?php $display_facets = array_slice(get_object_vars($facets), 0, 5); ?>
+							<?php foreach ($display_facets as $value => $count): ?>
+								<!-- Facet URL. -->
+								<?php $url = SolrSearch_Helpers_Facet::addFacet($name, $value); ?>
+								<!-- Facet link. -->
+								<a href="<?php echo $url; ?>" class="list-group-item facet-value">
+									<?php echo $value; ?><span class=" badge facet-count"><?php echo $count; ?></span>
+								</a>
+							<?php endforeach; ?>
+							<?php if ((count(get_object_vars($facets))) > 5 ): ?>
+								<?php $hidden_facets = array_slice(get_object_vars($facets), 5); ?>
+								<div id="collapse<?php echo $collapse_count; ?>" class="panel-collapse collapse">
+								<?php foreach ($hidden_facets as $value => $count): ?>
+									<!-- Facet URL. -->
+									<?php $url = SolrSearch_Helpers_Facet::addFacet($name, $value); ?>
+									<!-- Facet link. -->
+									<a href="<?php echo $url; ?>" class="list-group-item facet-value">
+										<?php echo $value; ?><span class=" badge facet-count"><?php echo $count; ?></span>
+									</a>
+								<?php endforeach; ?>
+								</div>
+								<a class="list-group-item more" role="button" data-toggle="collapse" href="#collapse<?php echo $collapse_count++; ?>">More...</a>
+							<?php endif; ?>
+						</div>
+					</div>
+				<?php endif; ?>
+			<?php endforeach; ?>
+		</div>
+	</div>
 </div>
-
-
-<!-- Applied facets. -->
-<div id="solr-applied-facets">
-
-  <ul>
-
-    <!-- Get the applied facets. -->
-    <?php foreach (SolrSearch_Helpers_Facet::parseFacets() as $f): ?>
-      <li>
-
-        <!-- Facet label. -->
-        <?php $label = SolrSearch_Helpers_Facet::keyToLabel($f[0]); ?>
-        <span class="applied-facet-label"><?php echo $label; ?></span> >
-        <span class="applied-facet-value"><?php echo $f[1]; ?></span>
-
-        <!-- Remove link. -->
-        <?php $url = SolrSearch_Helpers_Facet::removeFacet($f[0], $f[1]); ?>
-        (<a href="<?php echo $url; ?>">remove</a>)
-
-      </li>
-    <?php endforeach; ?>
-
-  </ul>
-
-</div>
-
-
-<!-- Facets. -->
-<div id="solr-facets">
-
-  <h2><?php echo __('Limit your search'); ?></h2>
-
-  <?php foreach ($results->facet_counts->facet_fields as $name => $facets): ?>
-
-    <!-- Does the facet have any hits? -->
-    <?php if (count(get_object_vars($facets))): ?>
-
-      <!-- Facet label. -->
-      <?php $label = SolrSearch_Helpers_Facet::keyToLabel($name); ?>
-      <strong><?php echo $label; ?></strong>
-
-      <ul>
-        <!-- Facets. -->
-        <?php foreach ($facets as $value => $count): ?>
-          <li class="<?php echo $value; ?>">
-
-            <!-- Facet URL. -->
-            <?php $url = SolrSearch_Helpers_Facet::addFacet($name, $value); ?>
-
-            <!-- Facet link. -->
-            <a href="<?php echo $url; ?>" class="facet-value">
-              <?php echo $value; ?>
-            </a>
-
-            <!-- Facet count. -->
-            (<span class="facet-count"><?php echo $count; ?></span>)
-
-          </li>
-        <?php endforeach; ?>
-      </ul>
-
-    <?php endif; ?>
-
-  <?php endforeach; ?>
-</div>
-
-
-<!-- Results. -->
-<div id="solr-results">
-
-  <!-- Number found. -->
-  <h2 id="num-found">
-    <?php echo $results->response->numFound; ?> results
-  </h2>
-
-  <?php foreach ($results->response->docs as $doc): ?>
-
-    <!-- Document. -->
-    <div class="result">
-
-      <!-- Header. -->
-      <div class="result-header">
-
-        <!-- Record URL. -->
-        <?php $url = SolrSearch_Helpers_View::getDocumentUrl($doc); ?>
-
-        <!-- Title. -->
-        <a href="<?php echo $url; ?>" class="result-title"><?php
-                $title = is_array($doc->title) ? $doc->title[0] : $doc->title;
-                if (empty($title)) {
-                    $title = '<i>' . __('Untitled') . '</i>';
-                }
-                echo $title;
-            ?></a>
-
-        <!-- Result type. -->
-        <span class="result-type">(<?php echo $doc->resulttype; ?>)</span>
-
-      </div>
-
-      <!-- Highlighting. -->
-      <?php if (get_option('solr_search_hl')): ?>
-        <ul class="hl">
-          <?php foreach($results->highlighting->{$doc->id} as $field): ?>
-            <?php foreach($field as $hl): ?>
-              <li class="snippet"><?php echo strip_tags($hl, '<em>'); ?></li>
-            <?php endforeach; ?>
-          <?php endforeach; ?>
-        </ul>
-      <?php endif; ?>
-
-      <?php
-        $item = get_db()->getTable($doc->model)->find($doc->modelid);
-        echo item_image_gallery(
-            array('wrapper' => array('class' => 'gallery')),
-            'square_thumbnail',
-            false,
-            $item
-        );
-      ?>
-
-    </div>
-
-  <?php endforeach; ?>
-
-</div>
-
 
 <?php echo pagination_links(); ?>
 <?php echo foot();

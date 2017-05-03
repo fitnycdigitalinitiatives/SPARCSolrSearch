@@ -28,7 +28,7 @@
 </div>
 
 <div class="row">
-	<div id="solr-results" class="col-lg-10 col-md-10 col-sm-8">
+	<div id="solr-results" class="col-lg-8 col-md-8 col-sm-6">
 		<!-- Results Grid -->
 		<div class="row" id="grid">
 
@@ -75,7 +75,7 @@
 		</div>
 	</div>
 	<!-- Facets. -->
-	<div class="col-lg-2 col-md-2 col-sm-4">
+	<div class="col-lg-4 col-md-4 col-sm-6">
 		<div id="solr-facets">
 			<div class="panel panel-default">
 				<div class="panel-heading">

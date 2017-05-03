@@ -12,23 +12,6 @@
 
 <?php echo head(array('title' => __('Solr Search')));?>
 
-
-<h1>
-<?php echo __('Search Results '); ?>
-<?php $query = array_key_exists('q', $_GET) ? $_GET['q'] : ''; ?>
-<?php if (preg_match('/^#[a-f0-9]{6}$/i', $query)): ?>
-<span class="glyphicon glyphicon-tint" style="color: <?php echo $query; ?>;">
-</span>
-<?php else: ?>
-<span class="badge">
-<?php echo $query; ?>
-</span>
-<?php endif; ?>
-<span class="badge">
-	<?php echo $results->response->numFound; ?>
-</span>
-</h1>
-
 <div class="row results">
 	<div class="col-xs-9">
 		<?php if (preg_match('/^#[a-f0-9]{6}$/i', $query)): ?>

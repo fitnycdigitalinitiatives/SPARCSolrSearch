@@ -14,16 +14,16 @@
 
 
 <h1>
-<?php echo __('Search Results '); ?> 
+<?php echo __('Search Results '); ?>
 <?php $query = array_key_exists('q', $_GET) ? $_GET['q'] : ''; ?>
 <?php if (preg_match('/^#[a-f0-9]{6}$/i', $query)): ?>
 <span class="glyphicon glyphicon-tint" style="color: <?php echo $query; ?>;">
 </span>
 <?php else: ?>
 <span class="badge">
-<?php echo $query; ?> 
+<?php echo $query; ?>
 </span>
-<?php endif; ?> 
+<?php endif; ?>
 <span class="badge">
 	<?php echo $results->response->numFound; ?>
 </span>
@@ -52,7 +52,7 @@
 						<?php $exhibit = $record->getExhibit(); ?>
 						<?php $recordImage = record_image($exhibit, 'square_thumbnail', array('class' => 'img-responsive')); ?>
 					<?php else: ?>
-						<?php $recordImage = record_image($record, 'square_thumbnail', array('class' => 'img-responsive')); ?>
+						<?php $recordImage = mdid_thumbnail_tag($record, 'img-responsive'); ?>
 					<?php endif; ?>
 					<?php echo $recordImage; ?>
 					<!-- Result type. -->
@@ -79,7 +79,7 @@
 		</div>
 	</div>
 	<!-- Facets. -->
-	<div class="col-lg-3 col-md-4 col-sm-6">		
+	<div class="col-lg-3 col-md-4 col-sm-6">
 		<div id="solr-facets">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -107,7 +107,7 @@
 					</div>
 				</div>
 			<?php endif; ?>
-			
+
 			<?php $collapse_count = 1; ?>
 			<?php foreach ($results->facet_counts->facet_fields as $name => $facets): ?>
 				<!-- Does the facet have any hits? -->
@@ -116,11 +116,11 @@
 						<!-- Facet label. -->
 						<?php $label = SolrSearch_Helpers_Facet::keyToLabel($name); ?>
 						<div class="panel-heading">
-							<strong><?php echo $label; ?></strong>							
+							<strong><?php echo $label; ?></strong>
 						</div>
 						<div class="list-group">
 							<!-- Facets. -->
-							
+
 							<?php $display_facets = array_slice(get_object_vars($facets), 0, 5); ?>
 							<?php foreach ($display_facets as $value => $count): ?>
 								<!-- Facet URL. -->

@@ -29,10 +29,22 @@
 </span>
 </h1>
 
-<hr>
+<div class="row results">
+	<div class="col-xs-9">
+		<?php if (preg_match('/^#[a-f0-9]{6}$/i', $query)): ?>
+			<?php
+			$color_name = color_name($query);
+			$swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $color_name . '"><div style="background-color:' . html_escape($query) . ';"></div></div>';
+			?>
+			<h4>Showing <?php echo $results->response->numFound; ?> results for <?php echo $swatch_html; ?></h4>
+		<?php else: ?>
+			<h4>Showing <?php echo $results->response->numFound; ?> results for <em><?php echo $query; ?></em></h4>
+		<?php endif; ?>
+	</div>
+</div>
 
 <div class="row">
-	<div id="solr-results" class="col-lg-8 col-md-8 col-sm-6">
+	<div id="solr-results" class="col-lg-10 col-md-10 col-sm-8">
 		<!-- Results Grid -->
 		<div class="row" id="grid">
 
@@ -79,7 +91,7 @@
 		</div>
 	</div>
 	<!-- Facets. -->
-	<div class="col-lg-4 col-md-4 col-sm-6">
+	<div class="col-lg-2 col-md-2 col-sm-4">
 		<div id="solr-facets">
 			<div class="panel panel-default">
 				<div class="panel-heading">

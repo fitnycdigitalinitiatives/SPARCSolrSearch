@@ -39,7 +39,7 @@
 			<?php foreach ($results->response->docs as $doc): ?>
 
 			<!-- Document. -->
-			<div class="result col-lg-4 col-md-6 col-sm-12 col-xs-6 item-thumb">
+			<div class="result col-lg-3 col-md-3 col-sm-6 col-xs-6 item-thumb">
 
 				<!-- Record URL. -->
 				<?php $url = SolrSearch_Helpers_View::getDocumentUrl($doc); ?>

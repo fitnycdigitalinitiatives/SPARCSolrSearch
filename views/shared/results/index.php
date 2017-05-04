@@ -93,7 +93,7 @@
 						<?php foreach (SolrSearch_Helpers_Facet::parseFacets() as $f): ?>
 							<!-- Remove link. -->
 							<?php $url = SolrSearch_Helpers_Facet::removeFacet($f[0], $f[1]); ?>
-							<a class="list-group-item" href="<?php echo $url; ?>">
+							<a class="list-group-item facet-value" href="<?php echo $url; ?>">
 							<!-- Facet label. -->
 							<?php $label = SolrSearch_Helpers_Facet::keyToLabel($f[0]); ?>
 							<?php if ($label == 'Facet Color'): ?>

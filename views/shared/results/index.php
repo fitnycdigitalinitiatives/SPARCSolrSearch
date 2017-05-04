@@ -96,8 +96,17 @@
 							<a class="list-group-item" href="<?php echo $url; ?>">
 							<!-- Facet label. -->
 							<?php $label = SolrSearch_Helpers_Facet::keyToLabel($f[0]); ?>
-							<span class="applied-facet-value"><?php echo $f[1]; ?> </span>
-							<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<?php if ($label == 'Facet Color'): ?>
+								<?php
+								$applied_facet_color_name = color_name($f[1]);
+								$applied_facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $applied_facet_color_name . '"><div style="background-color:' . html_escape($f[1]) . ';"></div></div>';
+								?>
+								<?php echo $applied_facet_swatch_html; ?>
+								<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<?php else: ?>
+								<span class="applied-facet-value"><?php echo $f[1]; ?> </span>
+								<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<?php endif: ?>
 							</a>
 						<?php endforeach; ?>
 					</div>

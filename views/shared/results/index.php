@@ -127,7 +127,7 @@
 									$facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $facet_color_name . '"><div style="background-color:' . html_escape($value) . ';"></div></div>';
 									?>
 									<a href="<?php echo $url; ?>" class="list-group-item facet-value">
-										<?php echo $facet_swatch_html; ?><span class=" badge facet-count"><?php echo $count; ?></span>
+										<?php echo $facet_swatch_html; ?><span class="badge facet-count"><?php echo $count; ?></span>
 									</a>
 								<?php endforeach; ?>
 								<?php if ((count(get_object_vars($facets))) > 5 ): ?>
@@ -142,7 +142,7 @@
 										$facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $facet_color_name . '"><div style="background-color:' . html_escape($value) . ';"></div></div>';
 										?>
 										<a href="<?php echo $url; ?>" class="list-group-item facet-value">
-											<?php echo $facet_swatch_html; ?><span class=" badge facet-count"><?php echo $count; ?></span>
+											<?php echo $facet_swatch_html; ?><span class="badge facet-count"><?php echo $count; ?></span>
 										</a>
 									<?php endforeach; ?>
 									</div>
@@ -161,7 +161,7 @@
 									<?php $url = SolrSearch_Helpers_Facet::addFacet($name, $value); ?>
 									<!-- Facet link. -->
 									<a href="<?php echo $url; ?>" class="list-group-item facet-value">
-										<?php echo $value; ?><span class=" badge facet-count"><?php echo $count; ?></span>
+										<?php echo $value; ?><span class="badge facet-count"><?php echo $count; ?></span>
 									</a>
 								<?php endforeach; ?>
 								<?php if ((count(get_object_vars($facets))) > 5 ): ?>
@@ -172,7 +172,7 @@
 										<?php $url = SolrSearch_Helpers_Facet::addFacet($name, $value); ?>
 										<!-- Facet link. -->
 										<a href="<?php echo $url; ?>" class="list-group-item facet-value">
-											<?php echo $value; ?><span class=" badge facet-count"><?php echo $count; ?></span>
+											<?php echo $value; ?><span class="badge facet-count"><?php echo $count; ?></span>
 										</a>
 									<?php endforeach; ?>
 									</div>

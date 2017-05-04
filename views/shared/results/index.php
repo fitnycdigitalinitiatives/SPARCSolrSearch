@@ -106,7 +106,7 @@
 							<?php else: ?>
 								<span class="applied-facet-value"><?php echo $f[1]; ?> </span>
 								<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<?php endif: ?>
+							<?php endif; ?>
 							</a>
 						<?php endforeach; ?>
 					</div>

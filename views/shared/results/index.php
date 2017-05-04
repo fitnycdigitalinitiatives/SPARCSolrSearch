@@ -111,25 +111,14 @@
 					<div class="panel panel-default">
 						<!-- Facet label. -->
 						<?php $label = SolrSearch_Helpers_Facet::keyToLabel($name); ?>
-						<div class="panel-heading">
-							<strong><?php echo $label; ?></strong>
-						</div>
-						<div class="list-group">
-							<!-- Facets. -->
-
-							<?php $display_facets = array_slice(get_object_vars($facets), 0, 5); ?>
-							<?php foreach ($display_facets as $value => $count): ?>
-								<!-- Facet URL. -->
-								<?php $url = SolrSearch_Helpers_Facet::addFacet($name, $value); ?>
-								<!-- Facet link. -->
-								<a href="<?php echo $url; ?>" class="list-group-item facet-value">
-									<?php echo $value; ?><span class=" badge facet-count"><?php echo $count; ?></span>
-								</a>
-							<?php endforeach; ?>
-							<?php if ((count(get_object_vars($facets))) > 5 ): ?>
-								<?php $hidden_facets = array_slice(get_object_vars($facets), 5); ?>
-								<div id="collapse<?php echo $collapse_count; ?>" class="panel-collapse collapse">
-								<?php foreach ($hidden_facets as $value => $count): ?>
+						<?php if ($label == 'Facet Color'): ?>
+							<div class="panel-heading">
+								<strong><?php echo 'Color'; ?></strong>
+							</div>
+							<div class="list-group">
+								<!-- Facets. -->
+								<?php $display_facets = array_slice(get_object_vars($facets), 0, 5); ?>
+								<?php foreach ($display_facets as $value => $count): ?>
 									<!-- Facet URL. -->
 									<?php $url = SolrSearch_Helpers_Facet::addFacet($name, $value); ?>
 									<!-- Facet link. -->
@@ -137,10 +126,56 @@
 										<?php echo $value; ?><span class=" badge facet-count"><?php echo $count; ?></span>
 									</a>
 								<?php endforeach; ?>
-								</div>
-								<a class="list-group-item more" role="button" data-toggle="collapse" href="#collapse<?php echo $collapse_count++; ?>">More...</a>
-							<?php endif; ?>
-						</div>
+								<?php if ((count(get_object_vars($facets))) > 5 ): ?>
+									<?php $hidden_facets = array_slice(get_object_vars($facets), 5); ?>
+									<div id="collapse<?php echo $collapse_count; ?>" class="panel-collapse collapse">
+									<?php foreach ($hidden_facets as $value => $count): ?>
+										<!-- Facet URL. -->
+										<?php $url = SolrSearch_Helpers_Facet::addFacet($name, $value); ?>
+										<!-- Facet link. -->
+										<?php
+										$facet_color_name = color_name($value);
+										$facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $facet_color_name . '"><div style="background-color:' . html_escape($value) . ';"></div></div>';
+										?>
+										<a href="<?php echo $url; ?>" class="list-group-item facet-value">
+											<?php echo $facet_swatch_html; ?><span class=" badge facet-count"><?php echo $count; ?></span>
+										</a>
+									<?php endforeach; ?>
+									</div>
+									<a class="list-group-item more" role="button" data-toggle="collapse" href="#collapse<?php echo $collapse_count++; ?>">More...</a>
+								<?php endif; ?>
+							</div>
+						<?php else: ?>
+							<div class="panel-heading">
+								<strong><?php echo $label; ?></strong>
+							</div>
+							<div class="list-group">
+								<!-- Facets. -->
+								<?php $display_facets = array_slice(get_object_vars($facets), 0, 5); ?>
+								<?php foreach ($display_facets as $value => $count): ?>
+									<!-- Facet URL. -->
+									<?php $url = SolrSearch_Helpers_Facet::addFacet($name, $value); ?>
+									<!-- Facet link. -->
+									<a href="<?php echo $url; ?>" class="list-group-item facet-value">
+										<?php echo $value; ?><span class=" badge facet-count"><?php echo $count; ?></span>
+									</a>
+								<?php endforeach; ?>
+								<?php if ((count(get_object_vars($facets))) > 5 ): ?>
+									<?php $hidden_facets = array_slice(get_object_vars($facets), 5); ?>
+									<div id="collapse<?php echo $collapse_count; ?>" class="panel-collapse collapse">
+									<?php foreach ($hidden_facets as $value => $count): ?>
+										<!-- Facet URL. -->
+										<?php $url = SolrSearch_Helpers_Facet::addFacet($name, $value); ?>
+										<!-- Facet link. -->
+										<a href="<?php echo $url; ?>" class="list-group-item facet-value">
+											<?php echo $value; ?><span class=" badge facet-count"><?php echo $count; ?></span>
+										</a>
+									<?php endforeach; ?>
+									</div>
+									<a class="list-group-item more" role="button" data-toggle="collapse" href="#collapse<?php echo $collapse_count++; ?>">More...</a>
+								<?php endif; ?>
+							</div>
+						<?php endif; ?>
 					</div>
 				<?php endif; ?>
 			<?php endforeach; ?>

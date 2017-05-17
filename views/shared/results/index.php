@@ -52,7 +52,6 @@
 						<?php else: ?>
 							<?php $recordImage = '<img src="' . img("fallback-image.png") . '" />'; ?>
 						<?php endif; ?>
-						<?php $recordImage = record_image($exhibit, 'square_thumbnail', array('class' => 'img-responsive')); ?>
 					<?php elseif ($recordType == 'Exhibit'): ?>
 						<?php if ($item = get_exhibit_item ($exhibit)): ?>
 							<?php $recordImage = mdid_thumbnail_tag($item, 'img-responsive'); ?>

@@ -44,7 +44,7 @@
 				<a href="<?php echo $url; ?>" class="thumbnail">
 					<?php $record = get_db()->getTable($doc->model)->find($doc->modelid); ?>
 					<?php $recordType = $doc->resulttype; ?>
-					<?php if ($recordType == 'Exhibit Page'): ?>
+					<?php if (($recordType == 'Exhibit Page') or ($recordType == 'Exhibit')): ?>
 						<?php $exhibit = $record->getExhibit(); ?>
 						<?php $recordImage = record_image($exhibit, 'square_thumbnail', array('class' => 'img-responsive')); ?>
 					<?php else: ?>

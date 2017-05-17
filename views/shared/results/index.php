@@ -45,20 +45,16 @@
 					<?php $record = get_db()->getTable($doc->model)->find($doc->modelid); ?>
 					<?php $recordType = $doc->resulttype; ?>
 					<?php if ($recordType == 'Exhibit Page'): ?>
-						<?php if($attachments = $record->getAllAttachments()); ?>
+						<?php $attachments = $record->getAllAttachments(); ?>
 						<?php $item = $attachments[0]->getItem();
 						$recordImage = mdid_thumbnail_tag($item, 'img-responsive');
 						?>
-						<?php else: ?>
-							<?php $recordImage = '<img src="' . img("fallback-image.png") . '" />'; ?>
-						<?php endif; ?>
 					<?php elseif ($recordType == 'Exhibit'): ?>
 						<?php if ($item = get_exhibit_item ($exhibit)): ?>
 							<?php $recordImage = mdid_thumbnail_tag($item, 'img-responsive'); ?>
 						<?php else: ?>
 							<?php $recordImage = '<img src="' . img("fallback-image.png") . '" />'; ?>
 						<?php endif; ?>
-						<?php $recordImage = record_image($exhibit, 'square_thumbnail', array('class' => 'img-responsive')); ?>
 					<?php else: ?>
 						<?php $recordImage = mdid_thumbnail_tag($record, 'img-responsive'); ?>
 					<?php endif; ?>

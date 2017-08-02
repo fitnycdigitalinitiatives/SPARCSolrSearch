@@ -45,7 +45,7 @@
     that avoids logging every request
 -->
 
-<schema name="SolrSearch" version="1.5">
+<schema name="SolrSearch" version="1.6">
   <!-- attribute "name" is the name of this schema and is only used for display purposes.
        version="x.y" is Solr's version number for the schema syntax and
        semantics.  It should not normally be changed by applications.
@@ -61,6 +61,7 @@
             to off for version >= 1.4
        1.5: omitNorms defaults to true for primitive field types
             (int, float, boolean, string...)
+       1.6: updated for solrconfig 6.6.0
      -->
 
  <fields>
@@ -94,8 +95,8 @@
     <field name="title" type="text_en" indexed="true" stored="true" multiValued="true" />
     <field name="tag" type="string" indexed="true" stored="true" multiValued="true" />
     <field name="collection" type="string" indexed="true" stored="true" />
-    <field name="public" type="boolean" indexed="true" stored="true" />
-    <field name="featured" type="boolean" indexed="true" stored="true" />
+    <field name="public" type="booleans" indexed="true" stored="true" />
+    <field name="featured" type="booleans" indexed="true" stored="true" />
     <field name="itemtype" type="string" indexed="true" stored="true" />
     <field name="resulttype" type="string" indexed="true" stored="true" />
     <field name="model" type="string" indexed="false" stored="true" />
@@ -164,12 +165,12 @@
     <fieldType name="string" class="solr.StrField" sortMissingLast="true" />
 
     <!-- boolean type: "true" or "false" -->
-    <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
+    <fieldType name="booleans" class="solr.BoolField" sortMissingLast="true"/>
 
     <!-- sortMissingLast and sortMissingFirst attributes are optional attributes are
          currently supported on types that are sorted internally as strings
          and on numeric types.
-	     This includes "string","boolean", and, as of 3.5 (and 4.x),
+	     This includes "string","booleans", and, as of 3.5 (and 4.x),
 	     int, float, long, date, double, including the "Trie" variants.
        - If sortMissingLast="true", then a sort on this field will cause documents
          without the field to come after documents with the field,
@@ -183,7 +184,7 @@
     -->
 
     <!--
-      Default numeric field types. For faster range queries, consider the tint/tfloat/tlong/tdouble types.
+      Default numeric field types. For faster range queries, consider the tint/tfloat/tlongs/tdoubles types.
     -->
     <fieldType name="int" class="solr.TrieIntField" precisionStep="0" positionIncrementGap="0"/>
     <fieldType name="float" class="solr.TrieFloatField" precisionStep="0" positionIncrementGap="0"/>
@@ -202,8 +203,8 @@
     -->
     <fieldType name="tint" class="solr.TrieIntField" precisionStep="8" positionIncrementGap="0"/>
     <fieldType name="tfloat" class="solr.TrieFloatField" precisionStep="8" positionIncrementGap="0"/>
-    <fieldType name="tlong" class="solr.TrieLongField" precisionStep="8" positionIncrementGap="0"/>
-    <fieldType name="tdouble" class="solr.TrieDoubleField" precisionStep="8" positionIncrementGap="0"/>
+    <fieldType name="tlongs" class="solr.TrieLongField" precisionStep="8" positionIncrementGap="0"/>
+    <fieldType name="tdoubles" class="solr.TrieDoubleField" precisionStep="8" positionIncrementGap="0"/>
 
     <!-- The format for this date field is of the form 1995-12-31T23:59:59Z, and
          is a more restricted form of the canonical representation of dateTime
@@ -225,12 +226,12 @@
 
          Consult the DateField javadocs for more information.
 
-         Note: For faster range queries, consider the tdate type
+         Note: For faster range queries, consider the tdates type
       -->
     <fieldType name="date" class="solr.TrieDateField" precisionStep="0" positionIncrementGap="0"/>
 
     <!-- A Trie based date field for faster date range queries and date faceting. -->
-    <fieldType name="tdate" class="solr.TrieDateField" precisionStep="6" positionIncrementGap="0"/>
+    <fieldType name="tdates" class="solr.TrieDateField" precisionStep="6" positionIncrementGap="0"/>
 
 
     <!--Binary data type. The data should be sent/retrieved in as Base64 encoded Strings -->

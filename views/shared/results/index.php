@@ -44,20 +44,24 @@
 				<a href="<?php echo $url; ?>" class="thumbnail">
 					<?php $record = get_db()->getTable($doc->model)->find($doc->modelid); ?>
 					<?php $recordType = $doc->resulttype; ?>
-					<?php if ($recordType == 'Exhibit Page'): ?>
-						<?php $attachments = $record->getAllAttachments(); ?>
-						<?php $item = $attachments[0]->getItem();
-						$recordImage = mdid_thumbnail_tag($item, 'img-responsive');
-						?>
-					<?php elseif ($recordType == 'Exhibit'): ?>
-						<?php if ($item = get_exhibit_item ($record)): ?>
-							<?php $recordImage = mdid_thumbnail_tag($item, 'img-responsive'); ?>
-						<?php else: ?>
-							<?php $recordImage = '<img src="' . img("fallback-image.png") . '" />'; ?>
-						<?php endif; ?>
-					<?php else: ?>
-						<?php $recordImage = mdid_thumbnail_tag($record, 'img-responsive'); ?>
-					<?php endif; ?>
+					<?php switch($recordType):
+					case 'Exhibit Page': ?>
+					  <?php $attachments = $record->getAllAttachments(); ?>
+					  <?php $item = $attachments[0]->getItem();
+					  $recordImage = mdid_thumbnail_tag($item, 'img-responsive');
+					  ?>
+					<?php break; ?>
+					<?php case 'Exhibit': ?>
+					  <?php if ($item = get_exhibit_item ($record)): ?>
+					    <?php $recordImage = mdid_thumbnail_tag($item, 'img-responsive'); ?>
+					  <?php else: ?>
+					    <?php $recordImage = '<img src="' . img("fallback-image.png") . '" />'; ?>
+					  <?php endif; ?>
+					<?php break; ?>
+					<?php case 'Item': ?>
+					  <?php $recordImage = mdid_thumbnail_tag($record, 'img-responsive'); ?>
+					<?php break; ?>
+					<?php endswitch; ?>
 					<?php echo $recordImage; ?>
 					<!-- Result type. -->
 					<?php if ($recordType == 'Item'): ?>

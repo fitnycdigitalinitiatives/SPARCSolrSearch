@@ -46,10 +46,13 @@
 					<?php $recordType = $doc->resulttype; ?>
 					<?php switch($recordType):
 					case 'Exhibit Page': ?>
-					  <?php $attachments = $record->getAllAttachments(); ?>
-					  <?php $item = $attachments[0]->getItem();
-					  $recordImage = mdid_thumbnail_tag($item, 'img-responsive');
-					  ?>
+					  <?php if ($attachments = $record->getAllAttachments()); ?>
+						  <?php $item = $attachments[0]->getItem();
+						  $recordImage = mdid_thumbnail_tag($item, 'img-responsive');
+						  ?>
+						<?php else: ?>
+					    <?php $recordImage = '<img src="' . img("fallback-image.png") . '" />'; ?>
+						<?php endif; ?>
 					<?php break; ?>
 					<?php case 'Exhibit': ?>
 					  <?php if ($item = get_exhibit_item ($record)): ?>

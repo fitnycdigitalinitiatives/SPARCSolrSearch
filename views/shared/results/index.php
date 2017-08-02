@@ -46,7 +46,7 @@
 					<?php $recordType = $doc->resulttype; ?>
 					<?php switch($recordType):
 					case 'Exhibit Page': ?>
-					  <?php if ($attachments = $record->getAllAttachments()); ?>
+					  <?php if ($attachments = $record->getAllAttachments()): ?>
 						  <?php $item = $attachments[0]->getItem();
 						  $recordImage = mdid_thumbnail_tag($item, 'img-responsive');
 						  ?>

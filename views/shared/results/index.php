@@ -27,7 +27,11 @@
 				<h4>Showing <?php echo $results->response->numFound; ?> results for <em><?php echo $query; ?></em></h4>
 			<?php endif; ?>
 		<?php else: ?>
-			<h4>Showing <?php echo $results->response->numFound; ?> results total</h4>
+			<?php if (($results->response->numFound) > 1): ?>
+				<h4>Showing <?php echo $results->response->numFound; ?> results</h4>
+			<?php else: ?>
+				<h4>Showing <?php echo $results->response->numFound; ?> result</h4>
+			<?php endif; ?>
 		<?php endif; ?>
 	</div>
 </div>

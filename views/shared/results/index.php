@@ -147,7 +147,11 @@
 						<?php $label = SolrSearch_Helpers_Facet::keyToLabel($name); ?>
 						<?php if (($label == 'Facet Color') OR ($label == 'Primary Color')): ?>
 							<div class="panel-heading">
+								<?php if ($label == 'Facet Color'): ?>
 								<strong><?php echo 'Color'; ?></strong>
+								<?php elseif ($label == 'Primary Color'): ?>
+									<strong><?php echo 'Color Family'; ?></strong>
+								<?php endif; ?>
 							</div>
 							<div class="list-group">
 								<!-- Facets. -->

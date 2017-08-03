@@ -15,15 +15,19 @@
 <div class="row results">
 	<div class="col-xs-9">
 		<?php $query = array_key_exists('q', $_GET) ? $_GET['q'] : ''; ?>
-		<?php $query = trim($query, '()'); ?>
-		<?php if (preg_match('/^#[a-f0-9]{6}$/i', $query)): ?>
-			<?php
-			$color_name = color_name($query);
-			$swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $color_name . '"><div style="background-color:' . html_escape($query) . ';"></div></div>';
-			?>
-			<h4>Showing <?php echo $results->response->numFound; ?> results for <?php echo $swatch_html; ?></h4>
+		<?php if (strlen($query) > 0): ?>
+			<?php $query = trim($query, '()'); ?>
+			<?php if (preg_match('/^#[a-f0-9]{6}$/i', $query)): ?>
+				<?php
+				$color_name = color_name($query);
+				$swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $color_name . '"><div style="background-color:' . html_escape($query) . ';"></div></div>';
+				?>
+				<h4>Showing <?php echo $results->response->numFound; ?> results for <?php echo $swatch_html; ?></h4>
+			<?php else: ?>
+				<h4>Showing <?php echo $results->response->numFound; ?> results for <em><?php echo $query; ?></em></h4>
+			<?php endif; ?>
 		<?php else: ?>
-			<h4>Showing <?php echo $results->response->numFound; ?> results for <em><?php echo $query; ?></em></h4>
+			<h4>Showing <?php echo $results->response->numFound; ?> results total</h4>
 		<?php endif; ?>
 	</div>
 </div>
@@ -61,6 +65,9 @@
 					  <?php else: ?>
 					    <?php $recordImage = '<img src="' . img("fallback-image.png") . '" />'; ?>
 					  <?php endif; ?>
+					<?php break; ?>
+					<?php case 'Simple Page': ?>
+						<?php $recordImage = '<img src="' . img("fallback-image.png") . '" />'; ?>
 					<?php break; ?>
 					<?php case 'Item': ?>
 					  <?php $recordImage = mdid_thumbnail_tag($record, 'img-responsive'); ?>

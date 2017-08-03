@@ -121,7 +121,7 @@
 							<a class="list-group-item facet-value" href="<?php echo $url; ?>">
 							<!-- Facet label. -->
 							<?php $label = SolrSearch_Helpers_Facet::keyToLabel($f[0]); ?>
-							<?php if ($label == 'Facet Color'): ?>
+							<?php if (($label == 'Facet Color') OR ($label == 'Primary Color')): ?>
 								<?php
 								$applied_facet_color_name = color_name($f[1]);
 								$applied_facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $applied_facet_color_name . '"><div style="background-color:' . html_escape($f[1]) . ';"></div></div>';
@@ -145,7 +145,7 @@
 					<div class="panel panel-default">
 						<!-- Facet label. -->
 						<?php $label = SolrSearch_Helpers_Facet::keyToLabel($name); ?>
-						<?php if ($label == 'Facet Color'): ?>
+						<?php if (($label == 'Facet Color') OR ($label == 'Primary Color')): ?>
 							<div class="panel-heading">
 								<strong><?php echo 'Color'; ?></strong>
 							</div>

@@ -79,9 +79,7 @@
 					<?php endswitch; ?>
 					<?php echo $recordImage; ?>
 					<!-- Result type. -->
-					<?php if ($recordType == 'Item'): ?>
-						<span class="badge result-type"><?php echo metadata($record, 'item_type_name'); ?></span>
-					<?php else: ?>
+					<?php if ($recordType !== 'Item'): ?>
 						<span class="badge result-type"><?php echo $recordType; ?></span>
 					<?php endif; ?>
 					<div class="caption">

@@ -15,6 +15,7 @@
 <div class="row results">
 	<div class="col-xs-9">
 		<?php $query = array_key_exists('q', $_GET) ? $_GET['q'] : ''; ?>
+		<?php $query = trim($query, '()'); ?>
 		<?php if (preg_match('/^#[a-f0-9]{6}$/i', $query)): ?>
 			<?php
 			$color_name = color_name($query);

@@ -155,7 +155,7 @@
 							</div>
 							<div class="list-group">
 								<!-- Facets. -->
-								<?php $display_facets = array_slice(get_object_vars($facets), 0, 5); ?>
+								<?php $display_facets = array_slice(get_object_vars($facets), 0, 3); ?>
 								<?php foreach ($display_facets as $value => $count): ?>
 									<!-- Facet URL. -->
 									<?php $url = SolrSearch_Helpers_Facet::addFacet($name, $value); ?>
@@ -168,8 +168,8 @@
 										<?php echo $facet_swatch_html; ?><span class="badge facet-count"><?php echo $count; ?></span>
 									</a>
 								<?php endforeach; ?>
-								<?php if ((count(get_object_vars($facets))) > 5 ): ?>
-									<?php $hidden_facets = array_slice(get_object_vars($facets), 5); ?>
+								<?php if ((count(get_object_vars($facets))) > 3 ): ?>
+									<?php $hidden_facets = array_slice(get_object_vars($facets), 3); ?>
 									<div id="collapse<?php echo $collapse_count; ?>" class="panel-collapse collapse">
 									<?php foreach ($hidden_facets as $value => $count): ?>
 										<!-- Facet URL. -->
@@ -193,7 +193,7 @@
 							</div>
 							<div class="list-group">
 								<!-- Facets. -->
-								<?php $display_facets = array_slice(get_object_vars($facets), 0, 5); ?>
+								<?php $display_facets = array_slice(get_object_vars($facets), 0, 3); ?>
 								<?php foreach ($display_facets as $value => $count): ?>
 									<!-- Facet URL. -->
 									<?php $url = SolrSearch_Helpers_Facet::addFacet($name, $value); ?>
@@ -202,8 +202,8 @@
 										<?php echo $value; ?><span class="badge facet-count"><?php echo $count; ?></span>
 									</a>
 								<?php endforeach; ?>
-								<?php if ((count(get_object_vars($facets))) > 5 ): ?>
-									<?php $hidden_facets = array_slice(get_object_vars($facets), 5); ?>
+								<?php if ((count(get_object_vars($facets))) > 3 ): ?>
+									<?php $hidden_facets = array_slice(get_object_vars($facets), 3); ?>
 									<div id="collapse<?php echo $collapse_count; ?>" class="panel-collapse collapse">
 									<?php foreach ($hidden_facets as $value => $count): ?>
 										<!-- Facet URL. -->

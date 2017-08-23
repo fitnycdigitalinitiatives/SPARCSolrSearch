@@ -49,5 +49,6 @@ body {
     position: absolute;
     top: 0;
     width: 20%; /* 6 columns */
+    display: none;
   }
 }

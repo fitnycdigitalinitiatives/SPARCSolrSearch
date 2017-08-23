@@ -6,9 +6,6 @@ html,
 body {
   overflow-x: hidden; /* Prevent scroll on narrow devices */
 }
-body {
-  padding-top: 70px;
-}
 
 /*
  * Off Canvas
@@ -48,7 +45,7 @@ body {
     left: 20%; /* 6 columns */
   }
 
-  .sidebar-offcanvas {
+  #sidebar.sidebar-offcanvas {
     position: absolute;
     top: 0;
     width: 20%; /* 6 columns */

@@ -107,7 +107,7 @@
 		</div>
 	</div>
 	<!-- Facets. -->
-	<div class="col-xs-12 sidebar-offcanvas" id="sidebar">
+	<div class="col-xs-12 sidebar-offcanvas hidden" id="sidebar">
 		<div id="solr-facets">
 			<div class="panel panel-default">
 				<div class="panel-heading">

@@ -246,6 +246,7 @@
     </div>
   </div>
 </div>
+</div>
 
 <?php echo pagination_links(); ?>
 <?php echo foot();

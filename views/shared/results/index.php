@@ -38,7 +38,7 @@
 	</div>
 	<div class="col-xs-3">
 		<div id="facet_button" class="pull-right hidden-xs">
-      <button type="button" class="btn btn-default" data-toggle="offcanvas">Limit Your Search</button>
+      <button type="button" class="btn btn-default" data-toggle="offcanvas"><strong>Limit Your Search</strong></button>
     </div>
 	</div>
 </div>
@@ -109,6 +109,11 @@
 	<!-- Facets. -->
 	<div class="col-xs-12 sidebar-offcanvas" id="sidebar">
 		<div id="solr-facets">
+			<div class="panel panel-default visible-xs">
+				<div class="panel-heading">
+					<strong><?php echo __('Limit your search'); ?></strong>
+				</div>
+			</div>
 			<!-- Applied facets. -->
 			<?php if (SolrSearch_Helpers_Facet::parseFacets()): ?>
 				<div id="solr-applied-facets" class="panel panel-default">

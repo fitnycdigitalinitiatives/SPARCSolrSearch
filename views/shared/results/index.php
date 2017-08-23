@@ -9,6 +9,8 @@
 
 ?>
 
+<?php queue_js_file('offcanvas'); ?>
+<?php queue_css_file('offcanvas'); ?>
 
 <?php echo head(array('title' => __('Solr Search')));?>
 
@@ -34,17 +36,22 @@
 			<?php endif; ?>
 		<?php endif; ?>
 	</div>
+	<div class="col-xs-3">
+		<div id="facet_button" class="pull-right hidden-xs">
+      <button type="button" class="btn btn-default" data-toggle="offcanvas">Limit Your Search</button>
+    </div>
+	</div>
 </div>
 
-<div class="row">
-	<div id="solr-results" class="col-lg-8 col-md-8 col-sm-6">
+<div class="row row-offcanvas row-offcanvas-right">
+	<div id="solr-results" class="col-xs-12">
 		<!-- Results Grid -->
 		<div class="row" id="grid">
 
 			<?php foreach ($results->response->docs as $doc): ?>
 
 			<!-- Document. -->
-			<div class="result col-lg-3 col-md-3 col-sm-6 col-xs-6 item-thumb">
+			<div class="result col-lg-2 col-md-2 col-sm-3 col-xs-6 item-thumb">
 
 				<!-- Record URL. -->
 				<?php $url = SolrSearch_Helpers_View::getDocumentUrl($doc); ?>
@@ -100,7 +107,7 @@
 		</div>
 	</div>
 	<!-- Facets. -->
-	<div class="col-lg-4 col-md-4 col-sm-6">
+	<div class="col-xs-12 sidebar-offcanvas" id="sidebar">
 		<div id="solr-facets">
 			<div class="panel panel-default">
 				<div class="panel-heading">

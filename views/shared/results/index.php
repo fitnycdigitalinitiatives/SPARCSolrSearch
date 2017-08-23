@@ -109,11 +109,6 @@
 	<!-- Facets. -->
 	<div class="col-xs-12 sidebar-offcanvas" id="sidebar">
 		<div id="solr-facets">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<strong><?php echo __('Limit your search'); ?></strong>
-				</div>
-			</div>
 			<!-- Applied facets. -->
 			<?php if (SolrSearch_Helpers_Facet::parseFacets()): ?>
 				<div id="solr-applied-facets" class="panel panel-default">

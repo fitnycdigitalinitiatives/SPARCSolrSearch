@@ -29,26 +29,26 @@ body {
 
   .row-offcanvas-right
   .sidebar-offcanvas {
-    right: -20%; /* 6 columns */
+    right: -300px; 
   }
 
   .row-offcanvas-left
   .sidebar-offcanvas {
-    left: -20%; /* 6 columns */
+    left: -300px;
   }
 
   .row-offcanvas-right.active {
-    right: 20%; /* 6 columns */
+    right: 300px;
   }
 
   .row-offcanvas-left.active {
-    left: 20%; /* 6 columns */
+    left: 300px;
   }
 
   #sidebar.sidebar-offcanvas {
     position: absolute;
     top: 0;
-    width: 20%; /* 6 columns */
+    width: 300px;
     display: none;
   }
 }

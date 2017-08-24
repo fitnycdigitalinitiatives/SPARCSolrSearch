@@ -104,7 +104,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -114,11 +114,6 @@
 
 				<!-- Facets. -->
 				<div id="solr-facets">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<strong><?php echo __('Limit your search'); ?></strong>
-						</div>
-					</div>
 					<!-- Applied facets. -->
 					<?php if (SolrSearch_Helpers_Facet::parseFacets()): ?>
 						<div id="solr-applied-facets" class="panel panel-default">

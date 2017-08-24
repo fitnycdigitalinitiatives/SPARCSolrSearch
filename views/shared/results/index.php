@@ -36,7 +36,7 @@
 	</div>
 	<div class="col-xs-4">
 		<div id="filter_button" class="pull-right">
-			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#filterModal">Filter Results <span class="glyphicon glyphicon-modal-window" aria-hidden="true"></span></button>
+			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#filterModal">Filter Results &nbsp;<span class="glyphicon glyphicon-plus small" aria-hidden="true"></span></button>
 		</div>
 	</div>
 </div>

@@ -29,7 +29,7 @@
 					  <?php foreach (SolrSearch_Helpers_Facet::parseFacets() as $f): ?>
 					    <!-- Remove link. -->
 					    <?php $url = SolrSearch_Helpers_Facet::removeFacet($f[0], $f[1]); ?>
-					    <br><small><em><a href="<?php echo $url; ?>"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>&nbsp;
+					    <br><small><em><a class="facet-kill" href="<?php echo $url; ?>"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>&nbsp;
 					    <!-- Facet label. -->
 					    <?php $label = SolrSearch_Helpers_Facet::keyToLabel($f[0]); ?>
 					    <?php if (($label == 'Facet Color') OR ($label == 'Primary Color')): ?>
@@ -53,7 +53,7 @@
 					  <?php foreach (SolrSearch_Helpers_Facet::parseFacets() as $f): ?>
 					    <!-- Remove link. -->
 					    <?php $url = SolrSearch_Helpers_Facet::removeFacet($f[0], $f[1]); ?>
-					    <br><small><em><a href="<?php echo $url; ?>"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>&nbsp;
+					    <br><small><em><a class="facet-kill" href="<?php echo $url; ?>"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>&nbsp;
 					    <!-- Facet label. -->
 					    <?php $label = SolrSearch_Helpers_Facet::keyToLabel($f[0]); ?>
 					    <?php if (($label == 'Facet Color') OR ($label == 'Primary Color')): ?>
@@ -79,7 +79,7 @@
 					  <?php foreach (SolrSearch_Helpers_Facet::parseFacets() as $f): ?>
 					    <!-- Remove link. -->
 					    <?php $url = SolrSearch_Helpers_Facet::removeFacet($f[0], $f[1]); ?>
-					    <br><small><em><a href="<?php echo $url; ?>"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>&nbsp;
+					    <br><small><em><a class="facet-kill" href="<?php echo $url; ?>"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>&nbsp;
 					    <!-- Facet label. -->
 					    <?php $label = SolrSearch_Helpers_Facet::keyToLabel($f[0]); ?>
 					    <?php if (($label == 'Facet Color') OR ($label == 'Primary Color')): ?>
@@ -103,7 +103,7 @@
 					  <?php foreach (SolrSearch_Helpers_Facet::parseFacets() as $f): ?>
 					    <!-- Remove link. -->
 					    <?php $url = SolrSearch_Helpers_Facet::removeFacet($f[0], $f[1]); ?>
-					    <br><small><em><a href="<?php echo $url; ?>"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>&nbsp;
+					    <br><small><em><a class="facet-kill" href="<?php echo $url; ?>"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>&nbsp;
 					    <!-- Facet label. -->
 					    <?php $label = SolrSearch_Helpers_Facet::keyToLabel($f[0]); ?>
 					    <?php if (($label == 'Facet Color') OR ($label == 'Primary Color')): ?>

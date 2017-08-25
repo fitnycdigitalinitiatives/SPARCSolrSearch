@@ -22,15 +22,103 @@
 				$color_name = color_name($query);
 				$swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $color_name . '"><div style="background-color:' . html_escape($query) . ';"></div></div>';
 				?>
-				<h4>Showing <?php echo $results->response->numFound; ?> results for <?php echo $swatch_html; ?></h4>
+				<h4>Showing <?php echo $results->response->numFound; ?> results for <?php echo $swatch_html; ?>
+					<!-- Applied facets. -->
+					<?php if (SolrSearch_Helpers_Facet::parseFacets()): ?>
+					  <!-- Get the applied facets. -->
+					  <?php foreach (SolrSearch_Helpers_Facet::parseFacets() as $f): ?>
+					    <!-- Remove link. -->
+					    <?php $url = SolrSearch_Helpers_Facet::removeFacet($f[0], $f[1]); ?>
+					    <br><small><em><a href="<?php echo $url; ?>"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>&nbsp;
+					    <!-- Facet label. -->
+					    <?php $label = SolrSearch_Helpers_Facet::keyToLabel($f[0]); ?>
+					    <?php if (($label == 'Facet Color') OR ($label == 'Primary Color')): ?>
+					      <?php
+					      $applied_facet_color_name = color_name($f[1]);
+					      $applied_facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $applied_facet_color_name . '"><div style="background-color:' . html_escape($f[1]) . ';"></div></div>';
+					      ?>
+					      <?php echo $applied_facet_swatch_html; ?>
+					    <?php else: ?>
+					      <span class="applied-facet-value"><?php echo $f[1]; ?></span>
+					    <?php endif; ?>
+					    </a></em></small>
+					  <?php endforeach; ?>
+					<?php endif; ?>
+				</h4>
 			<?php else: ?>
-				<h4>Showing <?php echo $results->response->numFound; ?> results for <em><?php echo $query; ?></em></h4>
+				<h4>Showing <?php echo $results->response->numFound; ?> results for <em><?php echo $query; ?></em>
+					<!-- Applied facets. -->
+					<?php if (SolrSearch_Helpers_Facet::parseFacets()): ?>
+					  <!-- Get the applied facets. -->
+					  <?php foreach (SolrSearch_Helpers_Facet::parseFacets() as $f): ?>
+					    <!-- Remove link. -->
+					    <?php $url = SolrSearch_Helpers_Facet::removeFacet($f[0], $f[1]); ?>
+					    <br><small><em><a href="<?php echo $url; ?>"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>&nbsp;
+					    <!-- Facet label. -->
+					    <?php $label = SolrSearch_Helpers_Facet::keyToLabel($f[0]); ?>
+					    <?php if (($label == 'Facet Color') OR ($label == 'Primary Color')): ?>
+					      <?php
+					      $applied_facet_color_name = color_name($f[1]);
+					      $applied_facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $applied_facet_color_name . '"><div style="background-color:' . html_escape($f[1]) . ';"></div></div>';
+					      ?>
+					      <?php echo $applied_facet_swatch_html; ?>
+					    <?php else: ?>
+					      <span class="applied-facet-value"><?php echo $f[1]; ?></span>
+					    <?php endif; ?>
+					    </a></em></small>
+					  <?php endforeach; ?>
+					<?php endif; ?>
+				</h4>
 			<?php endif; ?>
 		<?php else: ?>
 			<?php if (($results->response->numFound) > 1): ?>
-				<h4>Showing <?php echo $results->response->numFound; ?> results</h4>
+				<h4>Showing <?php echo $results->response->numFound; ?> results
+					<!-- Applied facets. -->
+					<?php if (SolrSearch_Helpers_Facet::parseFacets()): ?>
+					  <!-- Get the applied facets. -->
+					  <?php foreach (SolrSearch_Helpers_Facet::parseFacets() as $f): ?>
+					    <!-- Remove link. -->
+					    <?php $url = SolrSearch_Helpers_Facet::removeFacet($f[0], $f[1]); ?>
+					    <br><small><em><a href="<?php echo $url; ?>"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>&nbsp;
+					    <!-- Facet label. -->
+					    <?php $label = SolrSearch_Helpers_Facet::keyToLabel($f[0]); ?>
+					    <?php if (($label == 'Facet Color') OR ($label == 'Primary Color')): ?>
+					      <?php
+					      $applied_facet_color_name = color_name($f[1]);
+					      $applied_facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $applied_facet_color_name . '"><div style="background-color:' . html_escape($f[1]) . ';"></div></div>';
+					      ?>
+					      <?php echo $applied_facet_swatch_html; ?>
+					    <?php else: ?>
+					      <span class="applied-facet-value"><?php echo $f[1]; ?></span>
+					    <?php endif; ?>
+					    </a></em></small>
+					  <?php endforeach; ?>
+					<?php endif; ?>
+				</h4>
 			<?php else: ?>
-				<h4>Showing <?php echo $results->response->numFound; ?> result</h4>
+				<h4>Showing <?php echo $results->response->numFound; ?> result
+					<!-- Applied facets. -->
+					<?php if (SolrSearch_Helpers_Facet::parseFacets()): ?>
+					  <!-- Get the applied facets. -->
+					  <?php foreach (SolrSearch_Helpers_Facet::parseFacets() as $f): ?>
+					    <!-- Remove link. -->
+					    <?php $url = SolrSearch_Helpers_Facet::removeFacet($f[0], $f[1]); ?>
+					    <br><small><em><a href="<?php echo $url; ?>"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>&nbsp;
+					    <!-- Facet label. -->
+					    <?php $label = SolrSearch_Helpers_Facet::keyToLabel($f[0]); ?>
+					    <?php if (($label == 'Facet Color') OR ($label == 'Primary Color')): ?>
+					      <?php
+					      $applied_facet_color_name = color_name($f[1]);
+					      $applied_facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $applied_facet_color_name . '"><div style="background-color:' . html_escape($f[1]) . ';"></div></div>';
+					      ?>
+					      <?php echo $applied_facet_swatch_html; ?>
+					    <?php else: ?>
+					      <span class="applied-facet-value"><?php echo $f[1]; ?></span>
+					    <?php endif; ?>
+					    </a></em></small>
+					  <?php endforeach; ?>
+					<?php endif; ?>
+				</h4>
 			<?php endif; ?>
 		<?php endif; ?>
 	</div>
@@ -104,7 +192,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-sm" role="document">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

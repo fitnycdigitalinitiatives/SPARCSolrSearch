@@ -32,7 +32,7 @@
 	<div class="row">
 		<div class="col-sm-4 col-xs-6">
 			<h1>No Results...</h1>
-			<p class="lead">It doesn't look like we have any items to match your search at this time. Please try searching by a different keyword.</p>
+			<p class="lead">This is disappointing, but it doesn't look like we have any items to match your search at this time. Please try searching again with a different keyword.</p>
 		</div>
 	</div>
 <?php else: ?>

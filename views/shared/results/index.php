@@ -10,9 +10,25 @@
 ?>
 
 
-<?php echo head(array('title' => __('Solr Search')));?>
+
 <?php if ($results->response->numFound == 0): ?>
+	<?php echo head(array('title' => __('Solr Search'), 'bodyclass' => 'search error'));?>
 	<!-- No Results -->
+	<div class="row results">
+	  <div class="col-xs-6">
+	    <?php $query = array_key_exists('q', $_GET) ? $_GET['q'] : ''; ?>
+	    <?php $query = trim($query, '()'); ?>
+	    <?php if (preg_match('/^#[a-f0-9]{6}$/i', $query)): ?>
+	      <?php
+	      $color_name = color_name($query);
+	      $swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $color_name . '"><div style="background-color:' . html_escape($query) . ';"></div></div>';
+	      ?>
+	      <h4>Showing <?php echo $results->response->numFound; ?> results for <?php echo $swatch_html; ?></h4>
+	    <?php else: ?>
+	      <h4>Showing <?php echo $results->response->numFound; ?> results for <em><?php echo $query; ?></em></h4>
+	    <?php endif; ?>
+	  </div>
+	</div>
 	<div class="row">
 		<div class="col-sm-4 col-xs-6">
 			<h1>No Results...</h1>
@@ -20,6 +36,7 @@
 		</div>
 	</div>
 <?php else: ?>
+	<?php echo head(array('title' => __('Solr Search'), 'bodyclass' => 'search'));?>
 	<!-- Has Results -->
 	<div class="row results">
 		<div class="col-xs-8">

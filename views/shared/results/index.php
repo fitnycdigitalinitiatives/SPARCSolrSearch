@@ -12,7 +12,7 @@
 
 
 <?php if ($results->response->numFound == 0): ?>
-	<?php echo head(array('title' => __('Solr Search'), 'bodyclass' => 'search error'));?>
+	<?php echo head(array('title' => __('Search Results'), 'bodyclass' => 'search error'));?>
 	<!-- No Results -->
 	<div class="row results">
 	  <div class="col-xs-6">

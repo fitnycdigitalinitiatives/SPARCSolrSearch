@@ -349,6 +349,5 @@
 	</div>
 
 	<?php echo pagination_links(); ?>
-	<?php echo pagination_links(array('partial_file' => 'common/pagination_prev_next.php')); ?>
 <?php endif; ?>
 <?php echo foot();

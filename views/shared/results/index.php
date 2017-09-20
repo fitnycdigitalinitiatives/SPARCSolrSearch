@@ -36,7 +36,7 @@
 		</div>
 	</div>
 <?php else: ?>
-	<?php echo head(array('title' => __('Solr Search'), 'bodyclass' => 'search'));?>
+	<?php echo head(array('title' => __('Search Results'), 'bodyclass' => 'search'));?>
 	<!-- Has Results -->
 	<div class="row results">
 		<div class="col-xs-8">

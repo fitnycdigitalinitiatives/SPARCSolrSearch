@@ -313,8 +313,8 @@
 
 									<!-- Public Domain Facets -->
 									<?php elseif ($label == 'Rights'): ?>
-										<?php echo $facets; ?>
-									  <?php if (in_array('Public Domain', $facets)): ?>
+										<?php var_dump($facets); ?>
+									  <?php if (property_exists($facets, 'Public Domain')): ?>
 									    <div class="panel-heading">
 									      <strong><?php echo $label; ?></strong>
 									    </div>

@@ -313,7 +313,6 @@
 
 									<!-- Public Domain Facets -->
 									<?php elseif ($label == 'Rights'): ?>
-										<?php var_dump($facets); ?>
 									  <?php if (property_exists($facets, 'Public Domain')): ?>
 									    <div class="panel-heading">
 									      <strong><?php echo $label; ?></strong>
@@ -321,12 +320,14 @@
 									    <div class="list-group">
 									      <!-- Facets. -->
 									      <?php foreach ($facets as $value => $count): ?>
-									        <!-- Facet URL. -->
-									        <?php $url = SolrSearch_Helpers_Facet::addFacet($name, $value); ?>
-									        <!-- Facet link. -->
-									        <a href="<?php echo $url; ?>" class="list-group-item facet-value">
-									          <span class="badge facet-count"><?php echo $count; ?></span><?php echo $value; ?>
-									        </a>
+													<?php if ($value == 'Public Domain'): ?>
+										        <!-- Facet URL. -->
+										        <?php $url = SolrSearch_Helpers_Facet::addFacet($name, $value); ?>
+										        <!-- Facet link. -->
+										        <a href="<?php echo $url; ?>" class="list-group-item facet-value">
+										          <span class="badge facet-count"><?php echo $count; ?></span><?php echo $value; ?>
+										        </a>
+													<?php endif; ?>
 									      <?php endforeach; ?>
 									    </div>
 									  <?php endif; ?>

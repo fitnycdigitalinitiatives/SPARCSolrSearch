@@ -266,6 +266,8 @@
 								<div class="panel panel-default">
 									<!-- Facet label. -->
 									<?php $label = SolrSearch_Helpers_Facet::keyToLabel($name); ?>
+
+									<!-- Color Facets -->
 									<?php if (($label == 'Facet Color') OR ($label == 'Primary Color')): ?>
 										<div class="panel-heading">
 											<?php if ($label == 'Facet Color'): ?>
@@ -308,6 +310,27 @@
 												<a class="list-group-item more" role="button" data-toggle="collapse" href="#collapse<?php echo $collapse_count++; ?>">More...</a>
 											<?php endif; ?>
 										</div>
+
+									<!-- Public Domain Facets -->
+									<?php elseif ($label == 'Rights'): ?>
+									  <?php if (in_array('Public Domain', $facets)): ?>
+									    <div class="panel-heading">
+									      <strong><?php echo $label; ?></strong>
+									    </div>
+									    <div class="list-group">
+									      <!-- Facets. -->
+									      <?php foreach ($facets as $value => $count): ?>
+									        <!-- Facet URL. -->
+									        <?php $url = SolrSearch_Helpers_Facet::addFacet($name, $value); ?>
+									        <!-- Facet link. -->
+									        <a href="<?php echo $url; ?>" class="list-group-item facet-value">
+									          <span class="badge facet-count"><?php echo $count; ?></span><?php echo $value; ?>
+									        </a>
+									      <?php endforeach; ?>
+									    </div>
+									  <?php endif; ?>
+
+									<!-- Default Facets -->
 									<?php else: ?>
 										<div class="panel-heading">
 											<strong><?php echo $label; ?></strong>

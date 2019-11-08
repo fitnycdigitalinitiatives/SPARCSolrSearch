@@ -25,7 +25,7 @@
 	      ?>
 	      <h4>Showing <?php echo $results->response->numFound; ?> results for <?php echo $swatch_html; ?></h4>
 	    <?php else: ?>
-	      <h4>Showing <?php echo $results->response->numFound; ?> results for <em><?php echo $query; ?></em></h4>
+	      <h4>Showing <?php echo $results->response->numFound; ?> results for <em><?php echo html_escape($query); ?></em></h4>
 	    <?php endif; ?>
 	  </div>
 	</div>
@@ -65,14 +65,14 @@
 						      ?>
 						      <?php echo $applied_facet_swatch_html; ?>
 						    <?php else: ?>
-						      <span class="applied-facet-value"><?php echo $f[1]; ?></span>
+						      <span class="applied-facet-value"><?php echo html_escape($f[1]); ?></span>
 						    <?php endif; ?>
 						    </a></em></small>
 						  <?php endforeach; ?>
 						<?php endif; ?>
 					</h4>
 				<?php else: ?>
-					<h4>Showing <?php echo $results->response->numFound; ?> results for <em><?php echo $query; ?></em>
+					<h4>Showing <?php echo $results->response->numFound; ?> results for <em><?php echo html_escape($query); ?></em>
 						<!-- Applied facets. -->
 						<?php if (SolrSearch_Helpers_Facet::parseFacets()): ?>
 						  <!-- Get the applied facets. -->
@@ -89,7 +89,7 @@
 						      ?>
 						      <?php echo $applied_facet_swatch_html; ?>
 						    <?php else: ?>
-						      <span class="applied-facet-value"><?php echo $f[1]; ?></span>
+						      <span class="applied-facet-value"><?php echo html_escape($f[1]); ?></span>
 						    <?php endif; ?>
 						    </a></em></small>
 						  <?php endforeach; ?>
@@ -115,7 +115,7 @@
 						      ?>
 						      <?php echo $applied_facet_swatch_html; ?>
 						    <?php else: ?>
-						      <span class="applied-facet-value"><?php echo $f[1]; ?></span>
+						      <span class="applied-facet-value"><?php echo html_escape($f[1]); ?></span>
 						    <?php endif; ?>
 						    </a></em></small>
 						  <?php endforeach; ?>
@@ -139,7 +139,7 @@
 						      ?>
 						      <?php echo $applied_facet_swatch_html; ?>
 						    <?php else: ?>
-						      <span class="applied-facet-value"><?php echo $f[1]; ?></span>
+						      <span class="applied-facet-value"><?php echo html_escape($f[1]); ?></span>
 						    <?php endif; ?>
 						    </a></em></small>
 						  <?php endforeach; ?>
@@ -250,7 +250,7 @@
 											<?php echo $applied_facet_swatch_html; ?>
 											<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 										<?php else: ?>
-											<span class="applied-facet-value"><?php echo $f[1]; ?> </span>
+											<span class="applied-facet-value"><?php echo html_escape($f[1]); ?> </span>
 											<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 										<?php endif; ?>
 										</a>

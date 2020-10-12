@@ -20,9 +20,9 @@
 	    <?php $query = trim($query, '()'); ?>
 	    <?php if (preg_match('/^#[a-f0-9]{6}$/i', $query)): ?>
 	      <?php
-	      $color_name = color_name($query);
-	      $swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $color_name . '"><div style="background-color:' . html_escape($query) . ';"></div></div>';
-	      ?>
+          $color_name = color_name($query);
+          $swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $color_name . '"><div style="background-color:' . html_escape($query) . ';"></div></div>';
+          ?>
 	      <h4>Showing <?php echo $results->response->numFound; ?> results for <?php echo $swatch_html; ?></h4>
 	    <?php else: ?>
 	      <h4>Showing <?php echo $results->response->numFound; ?> results for <em><?php echo html_escape($query); ?></em></h4>
@@ -45,9 +45,9 @@
 				<?php $query = trim($query, '()'); ?>
 				<?php if (preg_match('/^#[a-f0-9]{6}$/i', $query)): ?>
 					<?php
-					$color_name = color_name($query);
-					$swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $color_name . '"><div style="background-color:' . html_escape($query) . ';"></div></div>';
-					?>
+                    $color_name = color_name($query);
+                    $swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $color_name . '"><div style="background-color:' . html_escape($query) . ';"></div></div>';
+                    ?>
 					<h4>Showing <?php echo $results->response->numFound; ?> results for <?php echo $swatch_html; ?>
 						<!-- Applied facets. -->
 						<?php if (SolrSearch_Helpers_Facet::parseFacets()): ?>
@@ -58,11 +58,11 @@
 						    <br><small><em><a class="facet-kill" href="<?php echo $url; ?>"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>&nbsp;
 						    <!-- Facet label. -->
 						    <?php $label = SolrSearch_Helpers_Facet::keyToLabel($f[0]); ?>
-						    <?php if (($label == 'Facet Color') OR ($label == 'Primary Color')): ?>
+						    <?php if (($label == 'Facet Color') or ($label == 'Primary Color')): ?>
 						      <?php
-						      $applied_facet_color_name = color_name($f[1]);
-						      $applied_facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $applied_facet_color_name . '"><div style="background-color:' . html_escape($f[1]) . ';"></div></div>';
-						      ?>
+                              $applied_facet_color_name = color_name($f[1]);
+                              $applied_facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $applied_facet_color_name . '"><div style="background-color:' . html_escape($f[1]) . ';"></div></div>';
+                              ?>
 						      <?php echo $applied_facet_swatch_html; ?>
 						    <?php else: ?>
 						      <span class="applied-facet-value"><?php echo html_escape($f[1]); ?></span>
@@ -82,11 +82,11 @@
 						    <br><small><em><a class="facet-kill" href="<?php echo $url; ?>"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>&nbsp;
 						    <!-- Facet label. -->
 						    <?php $label = SolrSearch_Helpers_Facet::keyToLabel($f[0]); ?>
-						    <?php if (($label == 'Facet Color') OR ($label == 'Primary Color')): ?>
+						    <?php if (($label == 'Facet Color') or ($label == 'Primary Color')): ?>
 						      <?php
-						      $applied_facet_color_name = color_name($f[1]);
-						      $applied_facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $applied_facet_color_name . '"><div style="background-color:' . html_escape($f[1]) . ';"></div></div>';
-						      ?>
+                              $applied_facet_color_name = color_name($f[1]);
+                              $applied_facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $applied_facet_color_name . '"><div style="background-color:' . html_escape($f[1]) . ';"></div></div>';
+                              ?>
 						      <?php echo $applied_facet_swatch_html; ?>
 						    <?php else: ?>
 						      <span class="applied-facet-value"><?php echo html_escape($f[1]); ?></span>
@@ -108,11 +108,11 @@
 						    <br><small><em><a class="facet-kill" href="<?php echo $url; ?>"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>&nbsp;
 						    <!-- Facet label. -->
 						    <?php $label = SolrSearch_Helpers_Facet::keyToLabel($f[0]); ?>
-						    <?php if (($label == 'Facet Color') OR ($label == 'Primary Color')): ?>
+						    <?php if (($label == 'Facet Color') or ($label == 'Primary Color')): ?>
 						      <?php
-						      $applied_facet_color_name = color_name($f[1]);
-						      $applied_facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $applied_facet_color_name . '"><div style="background-color:' . html_escape($f[1]) . ';"></div></div>';
-						      ?>
+                              $applied_facet_color_name = color_name($f[1]);
+                              $applied_facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $applied_facet_color_name . '"><div style="background-color:' . html_escape($f[1]) . ';"></div></div>';
+                              ?>
 						      <?php echo $applied_facet_swatch_html; ?>
 						    <?php else: ?>
 						      <span class="applied-facet-value"><?php echo html_escape($f[1]); ?></span>
@@ -132,11 +132,11 @@
 						    <br><small><em><a class="facet-kill" href="<?php echo $url; ?>"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>&nbsp;
 						    <!-- Facet label. -->
 						    <?php $label = SolrSearch_Helpers_Facet::keyToLabel($f[0]); ?>
-						    <?php if (($label == 'Facet Color') OR ($label == 'Primary Color')): ?>
+						    <?php if (($label == 'Facet Color') or ($label == 'Primary Color')): ?>
 						      <?php
-						      $applied_facet_color_name = color_name($f[1]);
-						      $applied_facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $applied_facet_color_name . '"><div style="background-color:' . html_escape($f[1]) . ';"></div></div>';
-						      ?>
+                              $applied_facet_color_name = color_name($f[1]);
+                              $applied_facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $applied_facet_color_name . '"><div style="background-color:' . html_escape($f[1]) . ';"></div></div>';
+                              ?>
 						      <?php echo $applied_facet_swatch_html; ?>
 						    <?php else: ?>
 						      <span class="applied-facet-value"><?php echo html_escape($f[1]); ?></span>
@@ -170,18 +170,18 @@
 			<a href="<?php echo $url; ?>" class="thumbnail">
 				<?php $record = get_db()->getTable($doc->model)->find($doc->modelid); ?>
 				<?php $recordType = $doc->resulttype; ?>
-				<?php switch($recordType):
-				case 'Exhibit Page': ?>
+				<?php switch ($recordType):
+                case 'Exhibit Page': ?>
 				  <?php if ($attachments = $record->getAllAttachments()): ?>
 					  <?php $item = $attachments[0]->getItem();
-					  $recordImage = mdid_thumbnail_tag($item, 'img-responsive');
-					  ?>
+                      $recordImage = mdid_thumbnail_tag($item, 'img-responsive');
+                      ?>
 					<?php else: ?>
 				    <?php $recordImage = '<img src="' . img("fallback-image.png") . '" />'; ?>
 					<?php endif; ?>
 				<?php break; ?>
 				<?php case 'Exhibit': ?>
-				  <?php if ($item = get_exhibit_item ($record)): ?>
+				  <?php if ($item = get_exhibit_item($record)): ?>
 				    <?php $recordImage = mdid_thumbnail_tag($item, 'img-responsive'); ?>
 				  <?php else: ?>
 				    <?php $recordImage = '<img src="' . img("fallback-image.png") . '" />'; ?>
@@ -202,12 +202,12 @@
 				<div class="caption">
 					<h5>
 					<?php
-						$title = is_array($doc->title) ? $doc->title[0] : $doc->title;
-						if (empty($title)) {
-							$title = '<i>' . __('Untitled') . '</i>';
-						}
-						echo $title;
-					?>
+                        $title = is_array($doc->title) ? $doc->title[0] : $doc->title;
+                        if (empty($title)) {
+                            $title = '<i>' . __('Untitled') . '</i>';
+                        }
+                        echo $title;
+                    ?>
 					</h5>
 				</div>
 			</a>
@@ -242,11 +242,11 @@
 										<a class="list-group-item facet-value" href="<?php echo $url; ?>">
 										<!-- Facet label. -->
 										<?php $label = SolrSearch_Helpers_Facet::keyToLabel($f[0]); ?>
-										<?php if (($label == 'Facet Color') OR ($label == 'Primary Color')): ?>
+										<?php if (($label == 'Facet Color') or ($label == 'Primary Color')): ?>
 											<?php
-											$applied_facet_color_name = color_name($f[1]);
-											$applied_facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $applied_facet_color_name . '"><div style="background-color:' . html_escape($f[1]) . ';"></div></div>';
-											?>
+                                            $applied_facet_color_name = color_name($f[1]);
+                                            $applied_facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $applied_facet_color_name . '"><div style="background-color:' . html_escape($f[1]) . ';"></div></div>';
+                                            ?>
 											<?php echo $applied_facet_swatch_html; ?>
 											<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 										<?php else: ?>
@@ -268,7 +268,7 @@
 									<?php $label = SolrSearch_Helpers_Facet::keyToLabel($name); ?>
 
 									<!-- Color Facets -->
-									<?php if (($label == 'Facet Color') OR ($label == 'Primary Color')): ?>
+									<?php if (($label == 'Facet Color') or ($label == 'Primary Color')): ?>
 										<div class="panel-heading">
 											<?php if ($label == 'Facet Color'): ?>
 											<strong><?php echo 'Color'; ?></strong>
@@ -284,14 +284,14 @@
 												<?php $url = SolrSearch_Helpers_Facet::addFacet($name, $value); ?>
 												<!-- Facet link. -->
 												<?php
-												$facet_color_name = color_name($value);
-												$facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $facet_color_name . '"><div style="background-color:' . html_escape($value) . ';"></div></div>';
-												?>
+                                                $facet_color_name = color_name($value);
+                                                $facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $facet_color_name . '"><div style="background-color:' . html_escape($value) . ';"></div></div>';
+                                                ?>
 												<a href="<?php echo $url; ?>" class="list-group-item facet-value">
 													<span class="badge facet-count"><?php echo $count; ?></span><?php echo $facet_swatch_html; ?>
 												</a>
 											<?php endforeach; ?>
-											<?php if ((count(get_object_vars($facets))) > 3 ): ?>
+											<?php if ((count(get_object_vars($facets))) > 3): ?>
 												<?php $hidden_facets = array_slice(get_object_vars($facets), 3); ?>
 												<div id="collapse<?php echo $collapse_count; ?>" class="panel-collapse collapse">
 												<?php foreach ($hidden_facets as $value => $count): ?>
@@ -299,9 +299,9 @@
 													<?php $url = SolrSearch_Helpers_Facet::addFacet($name, $value); ?>
 													<!-- Facet link. -->
 													<?php
-													$facet_color_name = color_name($value);
-													$facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $facet_color_name . '"><div style="background-color:' . html_escape($value) . ';"></div></div>';
-													?>
+                                                    $facet_color_name = color_name($value);
+                                                    $facet_swatch_html = '<div id="swatch" data-toggle="tooltip" title="Color name: '. $facet_color_name . '"><div style="background-color:' . html_escape($value) . ';"></div></div>';
+                                                    ?>
 													<a href="<?php echo $url; ?>" class="list-group-item facet-value">
 														<span class="badge facet-count"><?php echo $count; ?></span><?php echo $facet_swatch_html; ?>
 													</a>
@@ -335,7 +335,11 @@
 									<!-- Default Facets -->
 									<?php else: ?>
 										<div class="panel-heading">
-											<strong><?php echo $label; ?></strong>
+											<?php if ($label == "Creator"): ?>
+												<strong>Names</strong>
+											<?php else: ?>
+												<strong><?php echo $label; ?></strong>
+											<?php endif; ?>
 										</div>
 										<div class="list-group">
 											<!-- Facets. -->
@@ -348,7 +352,7 @@
 													<span class="badge facet-count"><?php echo $count; ?></span><?php echo $value; ?>
 												</a>
 											<?php endforeach; ?>
-											<?php if ((count(get_object_vars($facets))) > 3 ): ?>
+											<?php if ((count(get_object_vars($facets))) > 3): ?>
 												<?php $hidden_facets = array_slice(get_object_vars($facets), 3); ?>
 												<div id="collapse<?php echo $collapse_count; ?>" class="panel-collapse collapse">
 												<?php foreach ($hidden_facets as $value => $count): ?>

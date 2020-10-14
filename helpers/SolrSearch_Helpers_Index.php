@@ -22,7 +22,6 @@ class SolrSearch_Helpers_Index
      **/
     public static function connect($options=array())
     {
-
         $server = array_key_exists('solr_search_host', $options)
             ? $options['solr_search_host']
             : get_option('solr_search_host');
@@ -36,7 +35,6 @@ class SolrSearch_Helpers_Index
             : get_option('solr_search_core');
 
         return new Apache_Solr_Service($server, $port, $core);
-
     }
 
     /**
@@ -60,7 +58,14 @@ class SolrSearch_Helpers_Index
 
             // Set string field.
             if ($field->is_facet) {
-                $doc->setMultiValue($field->facetKey(), $text->text);
+                // Check if creator field has role, which we do not want to facet
+                if ((($field->label == "Creator") or ($field->label == "Contributor")) and strpos($text->text, ' [') !== false) {
+                    $explode = explode(" [", $text->text);
+                    $name = $explode[0];
+                    $doc->setMultiValue($field->facetKey(), $name);
+                } else {
+                    $doc->setMultiValue($field->facetKey(), $text->text);
+                }
             }
         }
     }
@@ -77,7 +82,6 @@ class SolrSearch_Helpers_Index
      **/
     public static function itemToDocument($item)
     {
-
         $fields = get_db()->getTable('SolrSearchField');
 
         $doc = new Apache_Solr_Document();
@@ -104,7 +108,8 @@ class SolrSearch_Helpers_Index
         // Collection:
         if ($collection = $item->getCollection()) {
             $doc->collection = metadata(
-                $collection, array('Dublin Core', 'Title')
+                $collection,
+                array('Dublin Core', 'Title')
             );
         }
 
@@ -121,7 +126,6 @@ class SolrSearch_Helpers_Index
         }
 
         return $doc;
-
     }
 
 
@@ -141,15 +145,11 @@ class SolrSearch_Helpers_Index
 
         if ($rc === 'SimplePagesPage') {
             $uri = url($record->slug);
-        }
-
-        else if ($rc === 'ExhibitPage') {
-
+        } elseif ($rc === 'ExhibitPage') {
             $exhibit = $record->getExhibit();
             $exUri   = self::getSlugUri($exhibit, $action);
             $uri     = "$exUri/$record->slug";
-
-        } else if (property_exists($record, 'slug')) {
+        } elseif (property_exists($record, 'slug')) {
             $uri = self::getSlugUri($record, $action);
         } else {
             $uri = record_url($record, $action);
@@ -218,7 +218,6 @@ class SolrSearch_Helpers_Index
      **/
     public static function indexAll($options=array())
     {
-
         $solr = self::connect($options);
 
         $db     = get_db();
@@ -237,7 +236,8 @@ class SolrSearch_Helpers_Index
         if (!empty($excludes)) {
             $select->where(
                 'collection_id IS NULL OR collection_id NOT IN (?)',
-                $excludes);
+                $excludes
+            );
         }
 
         // First get the items.
@@ -259,7 +259,6 @@ class SolrSearch_Helpers_Index
         $solr->commit();
 
         $solr->optimize();
-
     }
 
 
@@ -274,14 +273,10 @@ class SolrSearch_Helpers_Index
      **/
     public static function deleteAll($options=array())
     {
-
         $solr = self::connect($options);
 
         $solr->deleteByQuery('*:*');
         $solr->commit();
         $solr->optimize();
-
     }
-
-
 }

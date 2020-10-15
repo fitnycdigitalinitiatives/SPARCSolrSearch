@@ -59,9 +59,9 @@ class SolrSearch_Helpers_Index
             // Set string field.
             if ($field->is_facet) {
                 // Check if creator field has role, which we do not want to facet
-                if ((($field->label == "Creator") or ($field->label == "Contributor")) and strpos($text->text, ' [') !== false) {
-                    $explode = explode(" [", $text->text);
-                    $name = $explode[0];
+                if ((($field->label == "Creator") or ($field->label == "Contributor")) and strpos($text->text, '[') !== false) {
+                    $explode = explode("[", $text->text);
+                    $name = trim($explode[0]);
                     $doc->setMultiValue($field->facetKey(), $name);
                 } else {
                     $doc->setMultiValue($field->facetKey(), $text->text);

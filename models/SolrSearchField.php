@@ -45,7 +45,6 @@ class SolrSearchField extends Omeka_Record_AbstractRecord
      */
     public function __construct($element=null)
     {
-
         parent::__construct();
 
         if (!is_null($element)) {
@@ -58,9 +57,7 @@ class SolrSearchField extends Omeka_Record_AbstractRecord
 
             // Pubilc-facing label.
             $this->label = $element->name;
-
         }
-
     }
 
 
@@ -104,8 +101,11 @@ class SolrSearchField extends Omeka_Record_AbstractRecord
      */
     public function getElement()
     {
-        if (!$this->hasElement()) return null;
-        else return $this->getTable('Element')->find($this->element_id);
+        if (!$this->hasElement()) {
+            return null;
+        } else {
+            return $this->getTable('Element')->find($this->element_id);
+        }
     }
 
 
@@ -116,8 +116,11 @@ class SolrSearchField extends Omeka_Record_AbstractRecord
      */
     public function getElementSet()
     {
-        if (!$this->hasElement()) return null;
-        else return $this->getElement()->getElementSet();
+        if (!$this->hasElement()) {
+            return null;
+        } else {
+            return $this->getElement()->getElementSet();
+        }
     }
 
 
@@ -128,8 +131,11 @@ class SolrSearchField extends Omeka_Record_AbstractRecord
      */
     public function getElementSetName()
     {
-        if (!$this->hasElement()) return __('Omeka Categories');
-        else return $this->getElementSet()->name;
+        if (!$this->hasElement()) {
+            return __('Omeka Categories');
+        } else {
+            return $this->getElementSet()->name;
+        }
     }
 
 
@@ -159,11 +165,11 @@ class SolrSearchField extends Omeka_Record_AbstractRecord
      *
      * @return string The facet label.
      */
-    public function beforeSave()
+    public function beforeSave($args)
     {
         $label = trim($this->label);
-        if (empty($label)) $this->label = $this->getOriginalLabel();
+        if (empty($label)) {
+            $this->label = $this->getOriginalLabel();
+        }
     }
-
-
 }

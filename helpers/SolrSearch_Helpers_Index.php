@@ -20,7 +20,7 @@ class SolrSearch_Helpers_Index
      * @return Apache_Solr_Service
      * @author David McClure <david.mcclure@virginia.edu>
      **/
-    public static function connect($options=array())
+    public static function connect($options = array())
     {
         $server = array_key_exists('solr_search_host', $options)
             ? $options['solr_search_host']
@@ -34,7 +34,17 @@ class SolrSearch_Helpers_Index
             ? $options['solr_search_core']
             : get_option('solr_search_core');
 
-        return new Apache_Solr_Service($server, $port, $core);
+        $login = array_key_exists('solr_search_login', $options)
+            ? $options['solr_search_login']
+            : get_option('solr_search_login');
+
+        $password = array_key_exists('solr_search_password', $options)
+            ? $options['solr_search_password']
+            : get_option('solr_search_password');
+
+        $solrService = new Apache_Solr_Service($server, $port, $core);
+        $solrService->setAuthenticationCredentials($login, $password);
+        return $solrService;
     }
 
     /**
@@ -139,16 +149,16 @@ class SolrSearch_Helpers_Index
      **/
     public static function getUri($record)
     {
-        $uri    = '';
+        $uri = '';
         $action = 'show';
-        $rc     = get_class($record);
+        $rc = get_class($record);
 
         if ($rc === 'SimplePagesPage') {
             $uri = url($record->slug);
         } elseif ($rc === 'ExhibitPage') {
             $exhibit = $record->getExhibit();
-            $exUri   = self::getSlugUri($exhibit, $action);
-            $uri     = "$exUri/$record->slug";
+            $exUri = self::getSlugUri($exhibit, $action);
+            $uri = "$exUri/$record->slug";
         } elseif (property_exists($record, 'slug')) {
             $uri = self::getSlugUri($record, $action);
         } else {
@@ -176,13 +186,13 @@ class SolrSearch_Helpers_Index
         // Copied from omeka/applications/helpers/UrlFunctions.php, record_uri.
         // Yuck.
         $recordClass = get_class($record);
-        $inflector   = new Zend_Filter_Word_CamelCaseToDash();
-        $controller  = strtolower($inflector->filter($recordClass));
-        $controller  = Inflector::pluralize($controller);
-        $options     = array(
+        $inflector = new Zend_Filter_Word_CamelCaseToDash();
+        $controller = strtolower($inflector->filter($recordClass));
+        $controller = Inflector::pluralize($controller);
+        $options = array(
             'controller' => $controller,
-            'action'     => $action,
-            'id'         => $record->slug
+            'action' => $action,
+            'id' => $record->slug
         );
         $uri = url($options, 'id');
 
@@ -200,7 +210,7 @@ class SolrSearch_Helpers_Index
      * @return bool
      * @author Eric Rochester <erochest@virginia.edu>
      */
-    public static function pingSolrServer($options=array())
+    public static function pingSolrServer($options = array())
     {
         try {
             return self::connect($options)->ping();
@@ -216,12 +226,12 @@ class SolrSearch_Helpers_Index
      * @return void
      * @author Eric Rochester
      **/
-    public static function indexAll($options=array())
+    public static function indexAll($options = array())
     {
         $solr = self::connect($options);
 
-        $db     = get_db();
-        $table  = $db->getTable('Item');
+        $db = get_db();
+        $table = $db->getTable('Item');
         $select = $table->getSelect();
 
         // Removed in order to index both public and private items
@@ -253,7 +263,7 @@ class SolrSearch_Helpers_Index
         }
 
         // Now the other addon stuff.
-        $mgr  = new SolrSearch_Addon_Manager($db);
+        $mgr = new SolrSearch_Addon_Manager($db);
         $docs = $mgr->reindexAddons();
         $solr->addDocuments($docs);
         $solr->commit();
@@ -271,7 +281,7 @@ class SolrSearch_Helpers_Index
      * @return void
      * @author Eric Rochester
      **/
-    public static function deleteAll($options=array())
+    public static function deleteAll($options = array())
     {
         $solr = self::connect($options);
 

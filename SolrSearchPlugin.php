@@ -65,7 +65,8 @@ SQL
             $solr->deleteByQuery('*:*');
             $solr->commit();
             $solr->optimize();
-        } catch (Exception $e) {}
+        } catch (Exception $e) {
+        }
 
         self::_clearOptions();
 
@@ -114,7 +115,7 @@ SQL
     public function hookDefineRoutes($args)
     {
         $args['router']->addConfig(new Zend_Config_Ini(
-            SOLR_DIR.'/routes.ini'
+            SOLR_DIR . '/routes.ini'
         ));
     }
 
@@ -160,7 +161,8 @@ SQL
                     $solr->deleteById($mgr->getId($record));
                     $solr->commit();
                     $solr->optimize();
-                } catch (Exception $e) {}
+                } catch (Exception $e) {
+                }
             }
 
         }
@@ -234,7 +236,8 @@ SQL
                 $solr->deleteById($id);
                 $solr->commit();
                 $solr->optimize();
-            } catch (Exception $e) {}
+            } catch (Exception $e) {
+            }
         }
 
     }
@@ -255,7 +258,8 @@ SQL
             $solr->deleteById('Item_' . $item['id']);
             $solr->commit();
             $solr->optimize();
-        } catch (Exception $e) {}
+        } catch (Exception $e) {
+        }
 
     }
 
@@ -270,7 +274,7 @@ SQL
         $table = $this->_db->getTable('SolrSearchField');
         $facet = $table->findByElement($args['record']);
 
-        if(!empty($facet)) {
+        if (!empty($facet)) {
             $facet->delete();
         }
     }
@@ -285,7 +289,8 @@ SQL
     public function filterAdminNavigationMain($nav)
     {
         $nav[] = array(
-            'label' => __('Solr Search'), 'uri' => url('solr-search/server')
+            'label' => __('Solr Search'),
+            'uri' => url('solr-search/server')
         );
         return $nav;
     }
@@ -300,7 +305,8 @@ SQL
      */
     public function filterSearchFormDefaultAction($uri)
     {
-        if (!is_admin_theme()) $uri = url('solr-search/results/interceptor');
+        if (!is_admin_theme())
+            $uri = url('solr-search/results/interceptor');
         return $uri;
     }
 
@@ -355,7 +361,7 @@ SQL
     {
         $this->_db
             ->getTable('SolrSearchField')
-            ->installGenericFacet($slub, $label);
+            ->installGenericFacet($slug, $label);
     }
 
 
@@ -364,14 +370,16 @@ SQL
      */
     protected function _setOptions()
     {
-        set_option('solr_search_host',          'localhost');
-        set_option('solr_search_port',          '8080');
-        set_option('solr_search_core',          '/solr/omeka/');
-        set_option('solr_search_facet_limit',   '25');
-        set_option('solr_search_facet_sort',    'count');
-        set_option('solr_search_hl',            '1');
-        set_option('solr_search_hl_snippets',   '1');
-        set_option('solr_search_hl_fragsize',   '250');
+        set_option('solr_search_host', 'localhost');
+        set_option('solr_search_port', '8080');
+        set_option('solr_search_core', '/solr/omeka/');
+        set_option('solr_search_login', '');
+        set_option('solr_search_password', '');
+        set_option('solr_search_facet_limit', '25');
+        set_option('solr_search_facet_sort', 'count');
+        set_option('solr_search_hl', '1');
+        set_option('solr_search_hl_snippets', '1');
+        set_option('solr_search_hl_fragsize', '250');
         set_option('solr_search_hl_max_analyzed_chars', '51200');
         set_option('solr_search_display_private_items', '1');
     }
@@ -385,6 +393,8 @@ SQL
         delete_option('solr_search_host');
         delete_option('solr_search_port');
         delete_option('solr_search_core');
+        delete_option('solr_search_login');
+        delete_option('solr_search_password');
         delete_option('solr_search_facet_limit');
         delete_option('solr_search_facet_sort');
         delete_option('solr_search_hl');

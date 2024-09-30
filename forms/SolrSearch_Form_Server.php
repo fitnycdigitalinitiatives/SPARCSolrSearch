@@ -22,48 +22,72 @@ class SolrSearch_Form_Server extends Omeka_Form
 
         // Server Host:
         $this->addElement('text', 'solr_search_host', array(
-            'label'         => __('Server Host'),
-            'description'   => __('The location of the Solr server.'),
-            'value'         => get_option('solr_search_host'),
-            'required'      => true,
-            'size'          => 40
+            'label' => __('Server Host'),
+            'description' => __('The location of the Solr server.'),
+            'value' => get_option('solr_search_host'),
+            'required' => true,
+            'size' => 40
         ));
 
         // Server Port:
         $this->addElement('text', 'solr_search_port', array(
-            'label'         => __('Server Port'),
-            'description'   => __('The port that Solr is listening on.'),
-            'value'         => get_option('solr_search_port'),
-            'required'      => true,
-            'size'          => 40,
-            'validators'    => array(
-                array('validator' => 'Int', 'breakChainOnFailure' => true, 'options' =>
-                    array(
-                        'messages' => array(
-                            Zend_Validate_Int::NOT_INT => __('Must be an integer.')
+            'label' => __('Server Port'),
+            'description' => __('The port that Solr is listening on.'),
+            'value' => get_option('solr_search_port'),
+            'required' => true,
+            'size' => 40,
+            'validators' => array(
+                array(
+                    'validator' => 'Int',
+                    'breakChainOnFailure' => true,
+                    'options' =>
+                        array(
+                            'messages' => array(
+                                Zend_Validate_Int::NOT_INT => __('Must be an integer.')
+                            )
                         )
-                    )
                 )
             )
         ));
 
         // Core URL:
         $this->addElement('text', 'solr_search_core', array(
-            'label'         => __('Core URL'),
-            'description'   => __('The URL of the Solr core to index against.'),
-            'value'         => get_option('solr_search_core'),
-            'required'      => true,
-            'size'          => 40,
-            'validators'    => array(
-                array('validator' => 'Regex', 'breakChainOnFailure' => true, 'options' =>
-                    array(
-                        'pattern' => '/\/.*\//i',
-                        'messages' => array(
-                            Zend_Validate_Regex::NOT_MATCH => __('Invalid core URL.')
+            'label' => __('Core URL'),
+            'description' => __('The URL of the Solr core to index against.'),
+            'value' => get_option('solr_search_core'),
+            'required' => true,
+            'size' => 40,
+            'validators' => array(
+                array(
+                    'validator' => 'Regex',
+                    'breakChainOnFailure' => true,
+                    'options' =>
+                        array(
+                            'pattern' => '/\/.*\//i',
+                            'messages' => array(
+                                Zend_Validate_Regex::NOT_MATCH => __('Invalid core URL.')
+                            )
                         )
-                    )
                 )
             )
+        ));
+
+        // Server Login:
+        $this->addElement('text', 'solr_search_login', array(
+            'label' => __('Solr username'),
+            'description' => __('The username used for HTTP Authentication, if any.'),
+            'value' => get_option('solr_search_login'),
+            'required' => false,
+            'size' => 40,
+        ));
+
+        // Server Password:
+        $this->addElement('text', 'solr_search_password', array(
+            'label' => __('Solr password'),
+            'description' => __('The HTTP Authentication password.'),
+            'value' => get_option('solr_search_password'),
+            'required' => false,
+            'size' => 40,
         ));
 
         // Submit:
@@ -74,7 +98,9 @@ class SolrSearch_Form_Server extends Omeka_Form
         $this->addDisplayGroup(array(
             'solr_search_host',
             'solr_search_port',
-            'solr_search_core'
+            'solr_search_core',
+            'solr_search_login',
+            'solr_search_password'
         ), 'fields');
 
         $this->addDisplayGroup(array(
